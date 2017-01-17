@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 15:17:17 by kyork             #+#    #+#             */
-/*   Updated: 2017/01/12 15:17:17 by kyork            ###   ########.fr       */
+/*   Updated: 2017/01/17 15:08:13 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define STATUS_NEXTSECTION 2
 
-static int	parse_directive(int *attrs, char *line)
+int			parse_directive(int *attrs, char *line)
 {
 	if (line[1] != '#')
 		return (0);
@@ -33,7 +33,7 @@ static int	parse_directive(int *attrs, char *line)
 	return (0);
 }
 
-static int	parse_room(t_farm_layout *layout, char *line, int attrs)
+int			parse_room(t_farm_layout *layout, char *line, int attrs)
 {
 	char		**split;
 	t_room		*room;
@@ -46,7 +46,7 @@ static int	parse_room(t_farm_layout *layout, char *line, int attrs)
 	}
 	if (!(split[0] && split[1] && split[2] && !split[3]))
 		PARSE_ERROR();
-	NGUARD(GPARSE_ERROR(), room = malloc(sizeof(t_room)));
+	NGUARD(GPARSE_ERROR(), room = ft_memalloc(sizeof(t_room)));
 	NGUARD(GPARSE_ERROR(), room->name = ft_strdup(split[0]));
 	room->links = ft_ary_create(sizeof(t_room*));
 	NGUARD(GPARSE_ERROR(), room->links.ptr);
@@ -85,10 +85,10 @@ int			parse_rooms(t_farm_layout *layout, char **line, int fd)
 	return (1);
 }
 
-static t_room	*find_room(t_farm_layout *layout, char *name)
+t_room		*find_room(t_farm_layout *layout, char *name)
 {
 	t_room	**rooms;
-	int		idx;
+	size_t	idx;
 
 	rooms = layout->room_info.ptr;
 	idx = 0;
@@ -96,11 +96,12 @@ static t_room	*find_room(t_farm_layout *layout, char *name)
 	{
 		if (0 == ft_strcmp(name, rooms[idx]->name))
 			return (rooms[idx]);
+		idx++;
 	}
 	return (NULL);
 }
 
-static int	parse_link(t_farm_layout *layout, char *line)
+int			parse_link(t_farm_layout *layout, char *line)
 {
 	char	**split;
 	t_room	*r1;
@@ -115,6 +116,7 @@ static int	parse_link(t_farm_layout *layout, char *line)
 		return (1);
 	ft_ary_append(&r1->links, &r2);
 	ft_ary_append(&r2->links, &r1);
+	ft_strtab_destroy(split);
 	return (0);
 }
 
@@ -122,11 +124,20 @@ int 		parse_links(t_farm_layout *layout, char **line, int fd)
 {
 	int		status;
 
+	if (parse_link(layout, *line) != 0)
+		PARSE_ERROR();
+	free(*line);
 	while ((status = get_next_line(fd, line)) == 1)
 	{
 		if (*line[0] == 'L')
 			return (STATUS_NEXTSECTION);
-
+		if (*line[0] != '#')
+		{
+			status = parse_link(layout, *line);
+			if (status != 0)
+				PARSE_ERROR();
+		}
+		free(*line);
 	}
 	return (status);
 }
@@ -157,6 +168,15 @@ void		parse_error(char *file, int line)
 ** TODO - allow parsing ants
 */
 
+int			assign_start_finish(t_farm_layout *layout)
+{
+	size_t	idx;
+
+	layout
+	idx = 0;
+
+}
+
 int			parse_layout(t_farm_layout *layout, int fd)
 {
 	int		status;
@@ -167,16 +187,16 @@ int			parse_layout(t_farm_layout *layout, int fd)
 	if (ft_strict_atoi(&layout->ant_count, line) != 0)
 		PARSE_ERROR();
 	free(line);
+	layout->room_info = ft_ary_create(sizeof(t_room*));
 	if (parse_rooms(layout, &line, fd) != STATUS_NEXTSECTION)
 		PARSE_ERROR();
-	if (parse_link(layout, line) != 0)
-		PARSE_ERROR();
-	free(line);
 	status = parse_links(layout, &line, fd);
 	if (status == STATUS_NEXTSECTION)
 	{
+		// todo
 		PARSE_ERROR();
 	}
 	else if (status != 0)
 		PARSE_ERROR();
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:36:53 by kyork             #+#    #+#             */
-/*   Updated: 2017/01/11 13:44:41 by kyork            ###   ########.fr       */
+/*   Updated: 2017/01/17 14:55:07 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,12 @@ int					ft_strict_atoi(int *dst, const char *str);
 # define GPARSE_ERROR() parse_error(__FILE__, __LINE__);
 
 PARSEERR_RET		parse_error(char *file, int line);
+int					parse_layout(t_farm_layout *layout, int fd);
+int					parse_rooms(t_farm_layout *layout, char **line, int fd);
+int					parse_room(t_farm_layout *layout, char *line, int attrs);
+int					parse_directive(int *attrs, char *line);
+int					parse_links(t_farm_layout *layout, char **line, int fd);
+int					parse_link(t_farm_layout *layout, char *line);
+t_room				*find_room(t_farm_layout *layout, char *name);
 
 #endif

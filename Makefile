@@ -6,25 +6,21 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/01/03 16:39:08 by kyork            ###   ########.fr        #
+#    Updated: 2017/01/17 14:57:55 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= push_swap
+NAME		= lem_in
 
-COMMONSRC	+= 
+COMMONSRC	+= parse_farm.c ft_strict_atoi.c main.c
 
-SOLVESRC	+= 
-SOLVESRC	+= 
-SOLVESRC	+= 
-SOLVESRC	+= 
 SOLVESRC	+= 
 
-VISSRC		+=
+VISUSRC		+=
 
 COMMONOBJS	= $(addprefix build/common-, $(COMMONSRC:.c=.o))
 SOLVEOBJS	= $(addprefix build/solve-, $(SOLVESRC:.c=.o))
-CHECKOBJS	= $(addprefix build/vis-, $(VISSRC:.c=.o))
+VISUOBJS	= $(addprefix build/visu-, $(VISUSRC:.c=.o))
 
 LIBS		= libft/libft.a
 
@@ -94,6 +90,6 @@ build/common-%.o: srcs/%.c | build
 build/solve-%.o: srcs/solve/%.c | build
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-build/check-%.o: srcs/check/%.c | build
+build/visu-%.o: srcs/visu/%.c | build
 	$(CC) $(CFLAGS) -c -o $@ $<
 
