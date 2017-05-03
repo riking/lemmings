@@ -6,21 +6,21 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/01/17 14:57:55 by kyork            ###   ########.fr        #
+#    Updated: 2017/05/03 11:43:55 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem_in
 
-COMMONSRC	+= parse_farm.c ft_strict_atoi.c main.c
+COMMONSRC	+= ft_strict_atoi.c main.c
+COMMONSRC	+= moverec/moverec_new.c moverec/moverec_add.c moverec/moverec_next.c moverec/moverec_dump.c moverec/moverec_destroy.c
 
 SOLVESRC	+= 
 
-VISUSRC		+=
+VISULSRC	+=
 
-COMMONOBJS	= $(addprefix build/common-, $(COMMONSRC:.c=.o))
-SOLVEOBJS	= $(addprefix build/solve-, $(SOLVESRC:.c=.o))
-VISUOBJS	= $(addprefix build/visu-, $(VISUSRC:.c=.o))
+SOLVEOBJS	= $(addprefix srcs/, $(SOLVESRC:.c=.o) $(COMMONSRC:.c=.o))
+VISULOBJS	= $(addprefix srcs/, $(VISULSRC:.c=.o) $(COMMONSRC:.c=.o))
 
 LIBS		= libft/libft.a
 
@@ -34,7 +34,7 @@ ifndef NO_WERROR
 	LDFLAGS += -Werror
 endif
 
-ifdef DBUG
+ifdef DEBUG
 	CFLAGS += -fsanitize=address -g
 	LDFLAGS += -fsanitize=address -g
 endif
@@ -54,11 +54,11 @@ endif
 
 all: lem_in vis 
 
-lem_in: $(COMMONOBJS) $(SOLVEOBJS) $(LIBS)
+lem_in: $(SOLVEOBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 	@printf "\e[32m\e[1m[OK]\e[m $@\n" | tr '\\e' '\e'
 
-vis: $(COMMONOBJS) $(VISOBJS) $(LIBS)
+vis: $(VISOBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 	@printf "\e[32m\e[1m[OK]\e[m $@\n" | tr '\\e' '\e'
 
@@ -69,7 +69,7 @@ libft/.git/refs/heads/master:
 	# ignore
 
 clean:
-	rm -rf build
+	rm -f $(SOLVEOBJS) $(VISULOBJS)
 	$(MAKE) -C libft clean
 	@echo "\e[33m\e[1m[CLEAN]\e[m $$(basename $$(pwd))\n" | tr '\\e' '\e'
 
@@ -84,12 +84,6 @@ re: fclean
 build:
 	mkdir -p build
 
-build/common-%.o: srcs/%.c | build
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-build/solve-%.o: srcs/solve/%.c | build
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-build/visu-%.o: srcs/visu/%.c | build
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
