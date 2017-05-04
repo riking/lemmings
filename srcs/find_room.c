@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find_room.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 15:16:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:57:07 by kyork            ###   ########.fr       */
+/*   Created: 2017/05/04 14:40:52 by kyork             #+#    #+#             */
+/*   Updated: 2017/05/04 14:47:47 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "farm.h"
-#include "search/type.h"
-#include <libft.h>
 
-int		main(int argc, char **argv)
+t_room	*find_room(t_farm_layout *layout, char *name)
 {
-	t_farm	f;
+	size_t	i;
+	t_room	*it;
 
-	ft_bzero(&f, sizeof(f));
-	parse_layout(&f.layout, 0);
-	parse_set_startfinish(&f);
-	search_setup(&f);
-	search_workall(&f);
-	size_t i = 0;
-	while (i < f.paths.item_count)
+	i = 0;
+	while (i < layout->room_info.item_count)
 	{
-		t_path *p = ft_ary_get(&f.paths, i);
-		search_print_path(p);
+		it = *(t_room**)ft_ary_get(&layout->room_info, i);
+		if (0 == ft_strcmp(name, it->name))
+			return (it);
 		i++;
 	}
-	int debugger = 1;
-	(void)argc;
-	(void)argv;
-	return (debugger);
+	return (NULL);
 }

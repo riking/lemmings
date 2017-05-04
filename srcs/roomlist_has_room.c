@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   roomlist_has_room.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 15:16:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:57:07 by kyork            ###   ########.fr       */
+/*   Created: 2017/05/04 13:38:39 by kyork             #+#    #+#             */
+/*   Updated: 2017/05/04 14:44:20 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "farm.h"
-#include "search/type.h"
-#include <libft.h>
 
-int		main(int argc, char **argv)
+bool	roomlist_has_room(t_array *rlist, t_room *room)
 {
-	t_farm	f;
+	t_room	*it;
+	size_t	i;
 
-	ft_bzero(&f, sizeof(f));
-	parse_layout(&f.layout, 0);
-	parse_set_startfinish(&f);
-	search_setup(&f);
-	search_workall(&f);
-	size_t i = 0;
-	while (i < f.paths.item_count)
+	i = 0;
+	while (i < rlist->item_count)
 	{
-		t_path *p = ft_ary_get(&f.paths, i);
-		search_print_path(p);
+		it = *(t_room**)ft_ary_get(rlist, i);
+		if (it == room)
+			return (true);
 		i++;
 	}
-	int debugger = 1;
-	(void)argc;
-	(void)argv;
-	return (debugger);
+	return (false);
 }

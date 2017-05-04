@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   search_print_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 15:16:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:57:07 by kyork            ###   ########.fr       */
+/*   Created: 2017/05/04 13:35:15 by kyork             #+#    #+#             */
+/*   Updated: 2017/05/04 14:44:41 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "farm.h"
-#include "search/type.h"
-#include <libft.h>
+#include "type.h"
+#include <ft_printf.h>
 
-int		main(int argc, char **argv)
+void		search_print_path(t_path *p)
 {
-	t_farm	f;
+	size_t		i;
+	t_room		*r;
 
-	ft_bzero(&f, sizeof(f));
-	parse_layout(&f.layout, 0);
-	parse_set_startfinish(&f);
-	search_setup(&f);
-	search_workall(&f);
-	size_t i = 0;
-	while (i < f.paths.item_count)
+	i = 0;
+	while (i < p->item_count)
 	{
-		t_path *p = ft_ary_get(&f.paths, i);
-		search_print_path(p);
+		r = *(t_room**)ft_ary_get(p, i);
+		ft_printf("%s", r->name);
 		i++;
+		if (i != p->item_count)
+			ft_printf("-");
 	}
-	int debugger = 1;
-	(void)argc;
-	(void)argv;
-	return (debugger);
+	ft_printf("\n");
 }

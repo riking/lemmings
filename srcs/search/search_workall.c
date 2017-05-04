@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   search_workall.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 15:16:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:57:07 by kyork            ###   ########.fr       */
+/*   Created: 2017/05/04 13:28:00 by kyork             #+#    #+#             */
+/*   Updated: 2017/05/04 15:04:45 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "farm.h"
-#include "search/type.h"
-#include <libft.h>
+#include "type.h"
+#include <ft_printf.h>
 
-int		main(int argc, char **argv)
+void		search_workall(t_farm *f)
 {
-	t_farm	f;
+	size_t	idx;
+	t_path	p;
 
-	ft_bzero(&f, sizeof(f));
-	parse_layout(&f.layout, 0);
-	parse_set_startfinish(&f);
-	search_setup(&f);
-	search_workall(&f);
-	size_t i = 0;
-	while (i < f.paths.item_count)
+	while (f->pathq.item_count != 0)
 	{
-		t_path *p = ft_ary_get(&f.paths, i);
-		search_print_path(p);
-		i++;
+		idx = f->pathq.item_count - 1;
+		p = *(t_path*)ft_ary_get(&f->pathq, idx);
+		ft_printf("working path #%ld\n", idx);
+		search_work_path(f, &p);
+		ft_ary_destroy(&p);
+		ft_ary_remove(&f->pathq, idx);
 	}
-	int debugger = 1;
-	(void)argc;
-	(void)argv;
-	return (debugger);
+	ft_ary_destroy(&f->pathq);
+	f->pathq = FT_ARY_NULL;
 }
