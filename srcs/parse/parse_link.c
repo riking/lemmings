@@ -6,13 +6,30 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:11:41 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:14:18 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 13:51:35 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
 
-int		parse_link(t_farm_layout *layout, char *line)
+static void	add_link(t_room *a, t_room *b)
+{
+	size_t	i;
+	t_room	*it;
+
+	i = 0;
+	while (i < a->links.item_count)
+	{
+		it = *(t_room**)ft_ary_get(&a->links, i);
+		if (it == b)
+			return ;
+		i++;
+	}
+	ft_ary_append(&a->links, &b);
+	ft_ary_append(&b->links, &a);
+}
+
+int			parse_link(t_farm_layout *layout, char *line)
 {
 	char	**split;
 	t_room	*r1;
@@ -25,8 +42,7 @@ int		parse_link(t_farm_layout *layout, char *line)
 	r2 = find_room(layout, split[1]);
 	if (!r1 || !r2)
 		PARSE_ERROR("Link parts are not room names");
-	ft_ary_append(&r1->links, &r2);
-	ft_ary_append(&r2->links, &r1);
+	add_link(r1, r2);
 	ft_strtab_destroy(split);
 	return (0);
 }

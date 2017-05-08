@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:36:53 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 12:57:39 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 13:22:45 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ typedef struct		s_farm_layout {
 ** paths, pathq: t_array<t_path>
 ** pathq owned by search/
 ** paths is result of path searching
+** sets: t_array<t_pathset>
 */
 
 typedef struct		s_farm {
 	t_farm_layout	layout;
 	t_array			paths;
 	t_array			pathq;
+	t_array			sets;
 	t_room			*start;
 	t_room			*finish;
 }					t_farm;
@@ -84,10 +86,9 @@ typedef struct		s_ant {
 ** paths: t_array<t_path*>
 */
 typedef struct		s_pathset {
-	uint8_t		*used_rooms;
 	t_array		paths;
+	uint8_t		*used_rooms;
 }					t_pathset;
-
 
 /*
 ** Nothing seems to be better than identifying shortest N paths
