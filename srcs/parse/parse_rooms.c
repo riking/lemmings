@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:01:16 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:34:25 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 13:13:50 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		parse_links(t_farm_layout *layout, char **line, int fd)
 			parse_directive(layout, *line);
 		else
 			parse_link(layout, *line);
+		free(*line);
 	}
 	if (status)
 		PARSE_ERROR("Read error");
