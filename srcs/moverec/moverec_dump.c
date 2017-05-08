@@ -6,14 +6,14 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 11:16:00 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/03 11:19:50 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:09:18 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
 #include <ft_printf.h>
 
-static void	moverec_dumpturn(t_moverecord_turn *t, int fd)
+static void		moverec_dumpturn(t_moverecord_turn *t, int fd)
 {
 	size_t		i;
 	t_antmove	*it;
@@ -34,7 +34,7 @@ static void	moverec_dumpturn(t_moverecord_turn *t, int fd)
 	}
 }
 
-void	moverec_dump(t_moverecord *r, int fd)
+void			moverec_dump(t_moverecord *r, int fd)
 {
 	size_t				i;
 	t_moverecord_turn	*it;
@@ -44,5 +44,6 @@ void	moverec_dump(t_moverecord *r, int fd)
 	{
 		it = ft_ary_get(&r->turns, i);
 		moverec_dumpturn(it, fd);
-	}	
+		i++;
+	}
 }

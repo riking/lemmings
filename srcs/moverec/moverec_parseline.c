@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 11:26:46 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/03 11:41:10 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:10:02 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	moverec_parsemove(t_moverecord *r, t_farm *f,
 		t_antmove *m,
-		char * const move)
+		char *const move)
 {
 	char	*dash;
 	char	*name;
@@ -36,7 +36,7 @@ static int	moverec_parsemove(t_moverecord *r, t_farm *f,
 	return (0);
 }
 
-int			moverec_parseline(t_moverecord *r, t_farm *f, char * const line)
+int			moverec_parseline(t_moverecord *r, t_farm *f, char *const line)
 {
 	char		**movetab;
 	int			i;

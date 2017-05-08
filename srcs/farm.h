@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:36:53 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 13:22:45 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:12:53 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_farm {
 	t_array			paths;
 	t_array			pathq;
 	t_array			sets;
+	int				npath_target;
 	t_room			*start;
 	t_room			*finish;
 }					t_farm;
@@ -70,7 +71,7 @@ typedef struct		s_farm {
 typedef struct		s_path {
 	int			cost;
 	t_roomlist	p;
-}					t_path;	
+}					t_path;
 
 int					search_path_cost(t_farm *f, t_path *p);
 bool				paths_conflict(t_path *a, t_path *b);
@@ -95,9 +96,9 @@ typedef struct		s_pathset {
 **
 ** Overview:
 ** - breadth-first search, identify all paths (w/ optimizations)
-** - identify shortest 1 nonconflict paths, shortest 2 nonconflict paths, shortest
+** - identify shortest 1 nonconflict paths, shortest 2 nonconflict paths
 **       3 nonconflict paths, until no such set?
-** - 
+** -
 */
 
 t_array				walk_map(t_farm *f);
@@ -113,6 +114,11 @@ int					parse_layout(t_farm_layout *layout, int fd);
 int					parse_set_startfinish(t_farm *f);
 
 t_room				*find_room(t_farm_layout *layout, char *name);
+
+/*
+** max_path: max(start.links, end.links)
+*/
+int					max_path(t_farm *f);
 
 bool				roomlist_has_room(t_roomlist *rlist, t_room *room);
 

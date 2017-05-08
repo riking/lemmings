@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   max_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/04 12:57:14 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 14:10:36 by kyork            ###   ########.fr       */
+/*   Created: 2017/05/08 14:06:18 by kyork             #+#    #+#             */
+/*   Updated: 2017/05/08 14:07:33 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SEARCH_TYPE_H
-# define SEARCH_TYPE_H
+#include "farm.h"
 
-# include "../farm.h"
+int		max_path(t_farm *f)
+{
+	size_t	n;
 
-void		search_print_path(t_path *p);
-void		search_path_room_queue(t_path *p, t_room *r, t_array *pathq);
-void		search_work_path(t_farm *f, t_path *p);
-void		search_workall(t_farm *f, size_t target_path_count);
-void		search_setup(t_farm *f);
-void		search_cleanup(t_farm *f);
-
-int			search_path_cost(t_farm *f, t_path *p);
-
-#endif
+	n = f->start->links.item_count;
+	if (f->finish->links.item_count < n)
+		n = f->finish->links.item_count;
+	return ((int)n);
+}

@@ -6,20 +6,20 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:53:28 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 12:24:42 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:10:21 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
 
-static void assign_sf(t_room **ptr, t_room *r)
+static void		assign_sf(t_room **ptr, t_room *r)
 {
 	if (*ptr)
 		PARSE_ERROR("Start/finish set twice");
 	*ptr = r;
 }
 
-int		parse_set_startfinish(t_farm *f)
+int				parse_set_startfinish(t_farm *f)
 {
 	t_room	*r;
 	size_t	i;

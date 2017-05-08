@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 11:03:36 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/03 11:32:16 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:09:41 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_moverecord		*moverec_new(void);
 int					moverec_parseline(
 		t_moverecord *r,
 		t_farm *f,
-		char * const line);
+		char *const line);
 void				moverec_add(t_moverecord *r, t_room *from, t_room *to);
 void				moverec_next(t_moverecord *r);
 void				moverec_dump(t_moverecord *r, int fd);
