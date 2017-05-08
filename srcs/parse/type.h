@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:40:55 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:52:49 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 12:54:55 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int					parse_directive(t_farm_layout *layout, char *line);
 int					parse_ant_count(t_farm_layout *layout, char *line);
 int					parse_room(t_farm_layout *layout, char *line);
 int					parse_link(t_farm_layout *layout, char *line);
+
+void				parse_cleanup(t_farm_layout *layout);
 
 #endif

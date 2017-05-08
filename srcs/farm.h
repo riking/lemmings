@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:36:53 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:53:19 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 12:57:39 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 # include <libft.h>
 # include <stdbool.h>
+# include <stdint.h>
 
 /*
-** links is a t_array<t_room*>
+** t_roomlist is a t_array<t_room*>
+*/
+typedef t_array		t_roomlist;
+
+/*
 ** id is assigned in order of creation, used only internally
 */
 typedef struct		s_room {
-	t_array			links;
+	t_roomlist		links;
 	char			*name;
 	int				coord_x;
 	int				coord_y;
@@ -37,16 +42,16 @@ typedef struct		s_room {
 ** room_info is a t_array<t_room*>
 */
 typedef struct		s_farm_layout {
-	t_array		room_info;
+	t_roomlist	room_info;
 	int			directive_tmp;
 	int			ant_count;
 }					t_farm_layout;
 
-typedef struct		s_ant {
-	t_array		path;
-	int			offset;
-	int			ant_id;
-}					t_ant;
+/*
+** paths, pathq: t_array<t_path>
+** pathq owned by search/
+** paths is result of path searching
+*/
 
 typedef struct		s_farm {
 	t_farm_layout	layout;
@@ -57,9 +62,32 @@ typedef struct		s_farm {
 }					t_farm;
 
 /*
-** array of *t_room
+** p: roomlist
+** cost of 0 = not calculated; use search_path_cost() as a getter
 */
-typedef t_array		t_path;		
+typedef struct		s_path {
+	int			cost;
+	t_roomlist	p;
+}					t_path;	
+
+int					search_path_cost(t_farm *f, t_path *p);
+bool				paths_conflict(t_path *a, t_path *b);
+
+typedef struct		s_ant {
+	t_path		*path;
+	int			offset;
+	int			ant_id;
+}					t_ant;
+
+/*
+** used_rooms: bitfield; byte size = len(layout) + 7 / 8
+** paths: t_array<t_path*>
+*/
+typedef struct		s_pathset {
+	uint8_t		*used_rooms;
+	t_array		paths;
+}					t_pathset;
+
 
 /*
 ** Nothing seems to be better than identifying shortest N paths
@@ -73,6 +101,7 @@ typedef t_array		t_path;
 
 t_array				walk_map(t_farm *f);
 int					ft_strict_atoi(int *dst, const char *str);
+void				flood_fill(t_room *r);
 
 /*
 ** set a breakpoint to debug parse errors
@@ -84,6 +113,6 @@ int					parse_set_startfinish(t_farm *f);
 
 t_room				*find_room(t_farm_layout *layout, char *name);
 
-bool				roomlist_has_room(t_array *rlist, t_room *room);
+bool				roomlist_has_room(t_roomlist *rlist, t_room *room);
 
 #endif

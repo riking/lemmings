@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:53:28 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:56:56 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 12:24:42 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		parse_set_startfinish(t_farm *f)
 	}
 	if (!f->start || !f->finish)
 		PARSE_ERROR("Start/finish not set");
+	f->finish->end_dist = 0;
+	flood_fill(f->finish);
 	return (0);
 }

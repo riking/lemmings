@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:35:15 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:44:41 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 11:59:33 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void		search_print_path(t_path *p)
 	t_room		*r;
 
 	i = 0;
-	while (i < p->item_count)
+	while (i < p->p.item_count)
 	{
-		r = *(t_room**)ft_ary_get(p, i);
+		r = *(t_room**)ft_ary_get(&p->p, i);
 		ft_printf("%s", r->name);
 		i++;
-		if (i != p->item_count)
+		if (i != p->p.item_count)
 			ft_printf("-");
 	}
 	ft_printf("\n");

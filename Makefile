@@ -6,18 +6,18 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/05/04 14:57:26 by kyork            ###   ########.fr        #
+#    Updated: 2017/05/08 12:58:10 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem_in
 
-COMMONSRC	+= ft_strict_atoi.c main.c
+COMMONSRC	+= ft_strict_atoi.c main.c flood.c paths_conflict.c
 COMMONSRC	+= moverec/moverec_new.c moverec/moverec_add.c moverec/moverec_next.c moverec/moverec_dump.c moverec/moverec_destroy.c
-COMMONSRC	+= search/search_print_path.c search/search_path_room_queue.c search/search_work_path.c search/search_workall.c search/search_setup.c
+COMMONSRC	+= search/search_print_path.c search/search_path_room_queue.c search/search_work_path.c search/search_workall.c search/search_setup.c search/search_path_cost.c search/search_cleanup.c
 COMMONSRC	+= roomlist_has_room.c find_room.c
 COMMONSRC	+= parse/parse_directive.c parse/parse_room.c parse/parse_link.c parse/parse_movements.c parse/parse_error.c
-COMMONSRC	+= parse/parse_rooms.c parse/parse_layout.c parse/parse_set_startfinish.c
+COMMONSRC	+= parse/parse_rooms.c parse/parse_layout.c parse/parse_set_startfinish.c parse/parse_cleanup.c
 
 SOLVESRC	+= 
 
