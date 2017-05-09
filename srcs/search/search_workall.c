@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:28:00 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 18:01:27 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:25:42 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,20 @@ static size_t	select_next(t_farm *f)
 
 static bool		is_good_enough(t_farm *f)
 {
+	static int	g_attempts = 0;
+
+	g_attempts++;
 	ft_dprintf(2, "===HALT=== Stopping breadth-first search due to reaching "
 			"1K steps and checking for a path set\n");
 	subset_findn(f);
-	if (f->set && f->set->paths.item_count == (size_t)max_path(f))
+	if (f->set && (ssize_t)f->set->paths.item_count >= (max_path(f) -
+				g_attempts))
 	{
 		ft_dprintf(2, "===HALT=== Found a good path set, stopping search\n");
 		return (true);
 	}
-	ft_dprintf(2, "===HALT=== Continuing\n");
+	ft_dprintf(2, "===HALT=== Continuing, want at least %d\n", max_path(f) -
+			g_attempts);
 	return (false);
 }
 
@@ -64,8 +69,8 @@ void			search_workall(t_farm *f, size_t target_paths_count)
 		steps++;
 		idx = select_next(f);
 		p = *(t_path*)ft_ary_get(&f->pathq, idx);
-		ft_dprintf(2, "[%5ld found] working path #%ld %p %6ld\n",
-				f->paths.item_count, idx, p.p.ptr, steps);
+		ft_dprintf(2, "[%5ld found] working path #%ld %14p %6d %6ld\n",
+				f->paths.item_count, idx, p.p.ptr, p.cost, steps);
 		search_work_path(f, &p);
 		ft_ary_destroy(&p.p);
 		ft_ary_remove(&f->pathq, idx);

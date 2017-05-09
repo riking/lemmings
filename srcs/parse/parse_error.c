@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:19:32 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:40:34 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:06:28 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ PARSEERR_NORET	parse_error(char *file, int line, const char *fmt, ...)
 	va_start(args, fmt);
 	ft_vasprintf(&str, fmt, args);
 	va_end(args);
-	ft_dprintf(2, "ERROR\n");
-	ft_dprintf(0, "%s:%d: %s", file, line, str);
+	ft_dprintf(1, "ERROR\n");
+	ft_dprintf(2, "%s:%d: %s\n", file, line, str);
 	parse_error_debug_break();
 	free(str);
 	_exit(1);

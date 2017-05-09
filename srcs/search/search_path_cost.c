@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:00:31 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 12:41:13 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:23:21 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			search_path_cost(t_farm *f, t_path *p)
 		prev = *(t_room**)ft_ary_get(&p->p, i - 1);
 		it = *(t_room**)ft_ary_get(&p->p, i);
 		if (it->end_dist >= prev->end_dist)
-			penalty++;
+			penalty += 2;
 		i++;
 	}
 	penalty += conflict_penalty(f, p);

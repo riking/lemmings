@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:01:16 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 16:17:05 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:06:42 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		parse_rooms(t_farm_layout *layout, char **line, int fd)
 	{
 		if (ft_strstr(*line, "#") == *line)
 			parse_directive(layout, *line);
+		else if (ft_strstr(*line, "L") == *line)
+			PARSE_ERRORF("Illegal room name: '%s'", *line);
 		else
 		{
 			status = parse_room(layout, *line);

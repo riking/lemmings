@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 15:16:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 17:53:39 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:09:52 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ static void	run(t_farm *f)
 	search_workall(f, num_routes_needed(f));
 	subset_findn(f);
 	if (f->set == 0)
-	{
-		ft_dprintf(1, "ERROR\n");
-		return ;
-	}
+		PARSE_ERROR("No route to finish");
 	debug_print_pathfinder(f);
 	antassign_do(f);
 	print_layout(&f->layout, 1);

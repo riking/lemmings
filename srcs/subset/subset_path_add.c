@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 13:29:25 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 14:58:01 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 18:33:53 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool		subset_conflict_path(t_pathset *s, t_path *p)
 {
 	size_t	i;
 	t_room	*it;
+	t_path	*i2;
 
 	i = 0;
 	while (i < p->p.item_count)
@@ -39,6 +40,14 @@ bool		subset_conflict_path(t_pathset *s, t_path *p)
 		if (!it->is_start && !it->is_finish)
 			if (subset_room_has(s, it))
 				return (true);
+		i++;
+	}
+	i = 0;
+	while (i < s->paths.item_count)
+	{
+		i2 = *(t_path**)ft_ary_get(&s->paths, i);
+		if (i2 == p)
+			return (true);
 		i++;
 	}
 	return (false);
