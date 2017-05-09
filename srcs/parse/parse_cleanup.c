@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:54:33 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 16:59:45 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:35:31 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	destroy_room(t_room *r)
 	}
 	ft_ary_destroy(&r->link_comments);
 	free(r->name);
+	free(r);
 }
 
 void		parse_cleanup(t_farm_layout *layout)
