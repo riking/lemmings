@@ -6,14 +6,14 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 17:12:42 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 17:30:40 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:56:11 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
 #include <ft_printf.h>
 
-static bool	print_move(t_ant *a, size_t tick, int fd, bool addspace)
+static bool		print_move(t_ant *a, size_t tick, int fd, bool addspace)
 {
 	ssize_t	path_pos;
 	t_room	*r;
@@ -28,7 +28,7 @@ static bool	print_move(t_ant *a, size_t tick, int fd, bool addspace)
 	return (true);
 }
 
-static bool	antassign_printtick(t_farm *f, size_t tick, int fd)
+static bool		antassign_printtick(t_farm *f, size_t tick, int fd)
 {
 	size_t	i;
 	t_ant	*a;
@@ -46,7 +46,7 @@ static bool	antassign_printtick(t_farm *f, size_t tick, int fd)
 	return (any);
 }
 
-void	antassign_print(t_farm *f, int fd)
+void			antassign_print(t_farm *f, int fd)
 {
 	size_t	tick;
 	bool	printed;
