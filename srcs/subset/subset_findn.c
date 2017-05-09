@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 14:55:02 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 17:29:21 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:54:20 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,10 @@ void	subset_findn(t_farm *f)
 	f->npath_target = max_path(f);
 	while (f->npath_target > 0)
 	{
-		UNUSED_DEBUG("[subset] attempting n=%d\n", f->npath_target);
+		ft_dprintf(2, "[subset] attempting n=%d\n", f->npath_target);
 		if ((status = subset_search(f, &root)) == 2)
 			break ;
-		UNUSED_DEBUG("[subset] could not find path set of size %d\n", f->npath_target);
 		f->npath_target--;
 	}
 	free(root.used_rooms);
-	if (f->set == 0)
-	{
-		ft_printf("ERROR\n");
-		exit(1);
-	}
 }
