@@ -6,7 +6,7 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/05/08 17:20:55 by kyork            ###   ########.fr        #
+#    Updated: 2017/05/09 11:39:35 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,9 @@ endif
 
 .PHONY: all clean fclean re
 
-all: lem_in vis 
+all: lem_in
 
 lem_in: $(SOLVEOBJS) $(LIBS)
-	$(CC) $(LDFLAGS) -o $@ $^
-	@printf "\e[32m\e[1m[OK]\e[m $@\n" | tr '\\e' '\e'
-
-vis: $(VISOBJS) $(LIBS)
 	$(CC) $(LDFLAGS) -o $@ $^
 	@printf "\e[32m\e[1m[OK]\e[m $@\n" | tr '\\e' '\e'
 
