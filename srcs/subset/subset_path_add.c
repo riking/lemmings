@@ -6,13 +6,13 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 13:29:25 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 13:32:17 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 14:58:01 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type.h"
 
-void		subset_add_path(t_pathset *s, t_path *p, bool add)
+void		subset_add_path(t_pathset *s, t_path *p)
 {
 	size_t	i;
 	t_room	*it;
@@ -21,12 +21,10 @@ void		subset_add_path(t_pathset *s, t_path *p, bool add)
 	while (i < p->p.item_count)
 	{
 		it = *(t_room**)ft_ary_get(&p->p, i);
-		if (add)
-			subset_room_set(s, it);
-		else
-			subset_room_clear(s, it);
+		subset_room_set(s, it);
 		i++;
 	}
+	ft_ary_append(&s->paths, &p);
 }
 
 bool		subset_conflict_path(t_pathset *s, t_path *p)

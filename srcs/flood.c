@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:16:59 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 12:25:34 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:27:27 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		flood_fill(t_room *r)
 		if (it->end_dist > r->end_dist + 1)
 		{
 			it->end_dist = r->end_dist + 1;
-			ft_printf("%p.dist = %d\n", it, it->end_dist);
 			flood_fill(it);
 		}
 		i++;

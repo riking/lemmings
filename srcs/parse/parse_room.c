@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:51:23 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/04 14:33:12 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 16:17:46 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		parse_room(t_farm_layout *layout, char *line)
 		room->is_finish = true;
 	room->id = layout->room_info.item_count;
 	room->end_dist = INT_MAX;
+	room->comments = layout->tmp_comments;
+	room->link_comments = ft_ary_create(sizeof(t_array));
 	ft_ary_append(&layout->room_info, &room);
 	ft_strtab_destroy(split);
 	return (0);

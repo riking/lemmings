@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:28:00 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 14:13:05 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:27:07 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			search_workall(t_farm *f, size_t target_paths_count)
 	{
 		idx = select_next(f);
 		p = *(t_path*)ft_ary_get(&f->pathq, idx);
-		ft_printf("[%5ld found] working path #%ld %p\n", f->paths.item_count, idx,
+		ft_dprintf(2, "[%5ld found] working path #%ld %p\n", f->paths.item_count, idx,
 				p.p.ptr);
 		search_work_path(f, &p);
 		ft_ary_destroy(&p.p);
