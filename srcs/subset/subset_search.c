@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 14:45:32 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 17:26:28 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:33:49 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int submit(t_farm *f, t_pathset *sp)
 	t_pathset	*s;
 
 	s = subset_clone(f, sp);
+	if (f->set)
+		subset_destroy(f->set);
 	f->set = s;
 	return (2);
 }

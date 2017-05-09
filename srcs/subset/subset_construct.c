@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 14:58:26 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 15:14:33 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/08 17:34:07 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void		subset_destroy(t_pathset *s)
 {
 	ft_ary_destroy(&s->paths);
 	free(s->used_rooms);
+	free(s);
 }
