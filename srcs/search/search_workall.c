@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:28:00 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 18:25:42 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/11 11:46:05 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ static bool		is_good_enough(t_farm *f)
 	if (f->set && (ssize_t)f->set->paths.item_count >= (max_path(f) -
 				g_attempts))
 	{
+		subset_cleanup(f);
 		ft_dprintf(2, "===HALT=== Found a good path set, stopping search\n");
 		return (true);
 	}
+	subset_cleanup(f);
 	ft_dprintf(2, "===HALT=== Continuing, want at least %d\n", max_path(f) -
 			g_attempts);
 	return (false);
