@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:13:43 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 14:10:57 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/11 11:42:34 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void		search_work_path(t_farm *f, t_path *p)
 {
 	t_room	*last;
 	t_room	*neighb;
+	t_path	p_copy;
 	size_t	i;
 
 	last = *(t_room**)ft_ary_get(&p->p, p->p.item_count - 1);
-	if (roomlist_has_room(&last->links, f->finish))
+	if (last->is_finish)
 	{
-		search_path_room_queue(p, f->finish, &f->paths);
+		p_copy.p = ft_ary_clone(p->p, p->p.item_count);
+		p_copy.cost = 0;
+		ft_ary_append(&f->paths, &p_copy);
 		return ;
 	}
 	i = 0;
