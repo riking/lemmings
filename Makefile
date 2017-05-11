@@ -6,7 +6,7 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/05/11 11:43:19 by kyork            ###   ########.fr        #
+#    Updated: 2017/05/11 12:12:51 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ VISULOBJS	= $(addprefix srcs/, $(VISULSRC:.c=.o) $(COMMONSRC:.c=.o))
 
 LIBS		= libft/libft.a
 
+# Flags start
 CFLAGS		+= -Wall -Wextra -Wmissing-prototypes
-#CFLAGS		= -Wall -Wextra -Wfloat-equal -Wundef -Wint-to-pointer-cast -Wshadow -Wpointer-arith -Wcast-align -Wstrict-prototypes -Wcast-qual -Wmissing-prototypes -Wstrict-overflow=5 -Wwrite-strings -Wconversion --pedantic-errors
 CFLAGS		+= -I includes/
 LDFLAGS		+= -Wall -Wextra
 
@@ -50,6 +50,7 @@ ifdef RELEASE
 	CFLAGS += -O2
 	LDFLAGS += -O2
 endif
+# Flags end
 
 ifeq ($(SHELL),zsh)
 	PRINTF	= printf
@@ -72,6 +73,7 @@ libft/.git/refs/heads/master:
 	# ignore
 
 clean:
+	rm -r build/
 	rm -f $(SOLVEOBJS) $(VISULOBJS)
 	$(MAKE) -C libft clean
 	@echo "\e[33m\e[1m[CLEAN]\e[m $$(basename $$(pwd))\n" | tr '\\e' '\e'
@@ -87,6 +89,7 @@ re: fclean
 build:
 	mkdir -p build
 
-%.o: %.c
+build/%.o: %.c
+	@mkdir -p $(shell dirname $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
