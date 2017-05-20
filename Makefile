@@ -6,7 +6,7 @@
 #    By: kyork <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/09 19:11:26 by kyork             #+#    #+#              #
-#    Updated: 2017/05/11 12:12:51 by kyork            ###   ########.fr        #
+#    Updated: 2017/05/20 12:51:43 by kyork            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ libft/.git/refs/heads/master:
 	# ignore
 
 clean:
-	rm -r build/
+	rm -rf build/
 	rm -f $(SOLVEOBJS) $(VISULOBJS)
 	$(MAKE) -C libft clean
 	@echo "\e[33m\e[1m[CLEAN]\e[m $$(basename $$(pwd))\n" | tr '\\e' '\e'
@@ -90,6 +90,6 @@ build:
 	mkdir -p build
 
 build/%.o: %.c
-	@mkdir -p $(shell dirname $@)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
