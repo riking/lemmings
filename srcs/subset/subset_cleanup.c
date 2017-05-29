@@ -6,7 +6,7 @@
 /*   By: kyork <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 15:34:11 by kyork             #+#    #+#             */
-/*   Updated: 2017/05/08 15:34:42 by kyork            ###   ########.fr       */
+/*   Updated: 2017/05/29 12:58:45 by kyork            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void		subset_cleanup(t_farm *f)
 {
-	subset_destroy(f->set);
+	if (f->set)
+		subset_destroy(f->set);
+	f->set = NULL;
 }
